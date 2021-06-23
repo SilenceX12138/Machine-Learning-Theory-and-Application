@@ -41,7 +41,7 @@ if __name__ == '__main__':
         model = NeuralNet(tt_set.dataset.dim).to(device)
     elif model_name == 'dnn':
         model = DeepNeuralNet(tt_set.dataset.dim).to(device)
-    ckpt = torch.load(config['save_path'].format(model_name, 1.2009),
+    ckpt = torch.load(config['save_path'].format(model_name, 0.74979),
                       map_location='cpu')  # Load your best model
     model.load_state_dict(ckpt)
     preds = test(tt_set, model,

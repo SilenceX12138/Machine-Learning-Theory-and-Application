@@ -8,10 +8,10 @@ class DeepNeuralNet(nn.Module):
         super(DeepNeuralNet, self).__init__()
         # Define your neural network here
         # TODO: How to modify this model to achieve better performance?
-        self.net = nn.Sequential(nn.Linear(input_dim, 64), nn.ReLU(),
+        self.net = nn.Sequential(nn.Linear(input_dim, 64), nn.Sigmoid(),
                                  nn.Linear(64, 128), nn.ReLU(),
-                                 nn.Linear(128, 512), nn.ReLU(),
-                                 nn.Linear(512, 128), nn.ReLU(),
+                                 nn.Linear(128, 256), nn.ReLU(),
+                                 nn.Linear(256, 128), nn.ReLU(),
                                  nn.Linear(128, 64), nn.ReLU(),
                                  nn.Linear(64, 1))
 
@@ -31,7 +31,7 @@ class DeepNeuralNet(nn.Module):
         mse_loss = self.criterion(pred, target)
         # l1_reg = self.lambda1 * sum(
         # [torch.norm(param, 1) for param in self.parameters()])
-        l2_reg = self.lambda2 * sum(
-            [torch.norm(param, 2) for param in self.parameters()])
-        return mse_loss + l2_reg
-        # return mse_loss
+        # l2_reg = self.lambda2 * sum(
+        # [torch.norm(param, 2) for param in self.parameters()])
+        # return mse_loss + l2_reg
+        return mse_loss
