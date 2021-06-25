@@ -16,8 +16,8 @@ def test(tt_set, model, device):
         with torch.no_grad():  # disable gradient calculation
             pred = model(x)  # forward pass (compute output)
             preds.append(pred.detach().cpu())  # collect prediction
-    preds = torch.cat(preds, dim=0).numpy(
-    )  # concatenate all predictions and convert to a numpy array
+    # concatenate all predictions and convert to a numpy array
+    preds = torch.cat(preds, dim=0).numpy()
     return preds
 
 
@@ -44,6 +44,6 @@ if __name__ == '__main__':
     ckpt = torch.load(config['save_path'].format(model_name, 0.74979),
                       map_location='cpu')  # Load your best model
     model.load_state_dict(ckpt)
-    preds = test(tt_set, model,
-                 device)  # predict COVID-19 cases with your model
+    # predict COVID-19 cases with your model
+    preds = test(tt_set, model, device)
     save_pred(preds, 'pred.csv')  # save prediction file to pred.csv

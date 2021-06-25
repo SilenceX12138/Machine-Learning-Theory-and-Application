@@ -40,8 +40,7 @@ def train(tr_set, dv_set, model, config, device):
         if dev_mse < min_mse:
             # Save model if your model improved
             min_mse = dev_mse
-            print('epoch = {:4d}, loss = {:.4f}'.format(
-                epoch + 1, min_mse))
+            print('epoch = {:4d}, loss = {:.4f}'.format(epoch + 1, min_mse))
             # torch.save(model.state_dict(), config['save_path'].format(
             #     model_name, min_mse))  # Save model to specified path
             early_stop_cnt = 0
@@ -68,18 +67,19 @@ def dev(dv_set, model, device):
         with torch.no_grad():  # disable gradient calculation
             pred = model(x)  # forward pass (compute output)
             mse_loss = model.cal_loss(pred, y)  # compute loss
-        total_loss += mse_loss.detach().cpu().item() * len(
-            x)  # accumulate loss
-    total_loss = total_loss / len(dv_set.dataset)  # compute averaged loss
+        # accumulate loss
+        total_loss += mse_loss.detach().cpu().item() * len(x)
+    # compute averaged loss
+    total_loss = total_loss / len(dv_set.dataset)
 
     return total_loss
 
 
 if __name__ == '__main__':
-    device = get_device()  # get the current available device ('cpu' or 'cuda')
-    os.makedirs(
-        'checkpoints/{}'.format(model_name),
-        exist_ok=True)  # The trained model will be saved to ./checkpoints/
+    # get the current available device ('cpu' or 'cuda')
+    device = get_device()
+    # The trained model will be saved to ./checkpoints/
+    os.makedirs('checkpoints/{}'.format(model_name), exist_ok=True)
     tr_set = prep_dataloader(tr_path,
                              'train',
                              config['batch_size'],
@@ -88,7 +88,7 @@ if __name__ == '__main__':
                              'dev',
                              config['batch_size'],
                              target_only=target_only)
-    # Construct model and move to device
+    # construct model and move to device
     if model_name == 'nn':
         model = NeuralNet(tr_set.dataset.dim).to(device)
     elif model_name == 'dnn':
@@ -97,6 +97,7 @@ if __name__ == '__main__':
                                           device)
     plot_learning_curve(model_loss_record, title='deep model')
 
+    # validate modules
     # model = NeuralNet(tr_set.dataset.dim).to(device)
     # ckpt = torch.load(config['save_path'].format(),
     #                   map_location='cpu')  # Load your best model
