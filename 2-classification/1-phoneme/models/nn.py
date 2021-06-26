@@ -9,7 +9,8 @@ class Classifier(nn.Module):
         self.layer3 = nn.Linear(512, 128)
         self.out = nn.Linear(128, 39)
 
-        self.act_fn = nn.Sigmoid()
+        # self.act_fn = nn.Sigmoid()
+        self.act_fn = nn.ReLU()
 
     def forward(self, x):
         x = self.layer1(x)
