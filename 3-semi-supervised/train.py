@@ -1,27 +1,25 @@
 import torch
 import torch.nn as nn
-import torchvision
 from tqdm.auto import tqdm
 
-from config import (SEED, do_semi, is_transfer, learning_rate, model_path,
-                    n_epochs, weight_decay)
-from data.dataset import (get_dataloader, get_labeled_set, get_unlabeled_set,
-                          get_valid_set)
+from config import (SEED, do_semi, is_transfer, labeled_path, learning_rate,
+                    model_path, momentum, n_epochs, unlabeled_path, valid_path,
+                    weight_decay)
+from data.dataset import FOOD11DataSet, get_dataloader
 from models.cnn import Classifier
 from utils.env import get_device, same_seeds
 from utils.semi import update_train_set
 
 
 def train(model, labeled_set, unlabeled_set, valid_set):
-    model.train()
     best_acc = 0.0
+    train_set = labeled_set
     for epoch in range(n_epochs):
+        model.train() # set the model into train mode for BN
         train_loss = []
         train_accs = []
-        if do_semi and best_acc > 0.4:
+        if do_semi and best_acc > 0.5 and epoch % 15 == 0:
             train_set = update_train_set(model, labeled_set, unlabeled_set)
-        else:
-            train_set = labeled_set
         train_loader = get_dataloader(train_set)
         for batch in tqdm(train_loader):
             imgs, labels = batch
@@ -74,16 +72,20 @@ if __name__ == '__main__':
     same_seeds(SEED)
     device = get_device()
     # prepare data
-    labeled_set = get_labeled_set()
-    unlabeled_set = get_unlabeled_set()
-    valid_set = get_valid_set()
+    labeled_set = FOOD11DataSet(mode='train', path=labeled_path)
+    unlabeled_set = FOOD11DataSet(mode='semi', path=unlabeled_path)
+    valid_set = FOOD11DataSet(mode='valid', path=valid_path)
     # Initialize a model, and put it on the device specified.
     model = Classifier().to(device)
-    # model = torchvision.models.resnet101().to(device)
+    # model = torchvision.models.vgg19_bn().to(device)
     if is_transfer:
         model.load_state_dict(torch.load(model_path))
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(),
                                  lr=learning_rate,
                                  weight_decay=weight_decay)
+    # optimizer = torch.optim.SGD(model.parameters(),
+    #                             lr=learning_rate,
+    #                             momentum=momentum,
+    #                             weight_decay=weight_decay)
     train(model, labeled_set, unlabeled_set, valid_set)

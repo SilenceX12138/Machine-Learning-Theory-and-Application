@@ -1,9 +1,8 @@
 import torch
-import torchvision
 from tqdm.auto import tqdm
 
-from config import model_path
-from data.dataset import get_dataloader, get_test_set
+from config import model_path, test_path
+from data.dataset import FOOD11DataSet, get_dataloader
 from models.cnn import Classifier
 from utils.env import get_device
 
@@ -28,7 +27,7 @@ def save_pred(predictions):
 
 if __name__ == '__main__':
     device = get_device()
-    test_set = get_test_set()
+    test_set = FOOD11DataSet(mode='test', path=test_path)
     test_loader = get_dataloader(test_set, mode='test')
     model = Classifier().to(device)
     # model = torchvision.models.resnet101().to(device)

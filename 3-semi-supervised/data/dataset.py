@@ -1,8 +1,10 @@
+import os
+
 import torch
 from config import batch_size
 from PIL import Image
-from torch.utils.data import DataLoader, TensorDataset
-from torchvision.datasets import DatasetFolder
+from torch.utils.data import DataLoader
+from torch.utils.data.dataset import Dataset
 from torchvision.transforms import transforms
 
 train_tfm = transforms.Compose([
@@ -25,48 +27,71 @@ test_tfm = transforms.Compose([
 ])
 
 
-def load_img(x):
-    return Image.open(x)
+class FOOD11DataSet(Dataset):
+    def __init__(self, mode, path=None, data=None, label=None) -> None:
+        super().__init__()
+        self.mode = mode
 
+        # Construct a dataset with given data
+        if data != None and label != None:
+            self.data = data
+            self.label = label
+            return
 
-def get_labeled_set():
-    label_set = DatasetFolder("data/training/labeled",
-                              loader=load_img,
-                              extensions="jpg",
-                              transform=train_tfm)
+        # Construct a dataset with given path
+        if mode in ['train', 'semi']:
+            self.transform = train_tfm
+        else:
+            self.transform = test_tfm
 
-    # change DatasetFolder into TensorDataset for semi-supervised learning when concatenating dataset
-    data = [sample[0] for sample in list(label_set)]
-    label = label_set.targets
+        self.data = []
+        self.label = []
+        food_list = os.listdir(path)
+        for food in food_list:
+            img_path = path + food + '/'
+            img_list = os.listdir(img_path)
+            for img in img_list:
+                self.data.append(img_path + img)
+                self.label.append(int(food))
 
-    return TensorDataset(torch.stack(data), torch.Tensor(label).long())
+        self.label = torch.LongTensor(self.label)
 
+    def __getitem__(self, index):
+        # transfrom the image every time when loading
+        img = Image.open(self.data[index])
+        if self.mode == 'train':
+            return train_tfm(img), self.label[index]
+        elif self.mode == 'semi':
+            return train_tfm(img), self.label[index], index
+        else:
+            return test_tfm(img), self.label[index]
 
-def get_unlabeled_set():
-    # The argument "loader" tells how torchvision reads the data.
-    unlabeled_set = DatasetFolder("data/training/unlabeled",
-                                  loader=load_img,
-                                  extensions="jpg",
-                                  transform=train_tfm)
+    def __len__(self):
+        return len(self.data)
 
-    return unlabeled_set
+    def sample_dataset(self, mode, index_list, label_list=None):
+        """
+        return a new FOOD11Dataset according to index
+        """
+        sample_data = [self.data[index] for index in index_list]
+        if label_list is None:
+            sample_label = [self.label[index] for index in index_list]
+        else:
+            sample_label = label_list
+        return FOOD11DataSet(mode=mode, data=sample_data, label=sample_label)
 
-
-def get_valid_set():
-    # Windows doesn't support lambda function loader
-    valid_set = DatasetFolder("data/validation",
-                              loader=load_img,
-                              extensions="jpg",
-                              transform=test_tfm)
-    return valid_set
-
-
-def get_test_set():
-    test_set = DatasetFolder("data/testing",
-                             loader=load_img,
-                             extensions="jpg",
-                             transform=test_tfm)
-    return test_set
+    def drop_dataset(self, mode, index_list):
+        """
+        return a new dataset that drops data and labels according to index_list
+        """
+        left_data = [
+            self.data[i] for i in range(len(self.data)) if i not in index_list
+        ]
+        left_label = [
+            self.label[i] for i in range(len(self.label))
+            if i not in index_list
+        ]
+        return FOOD11DataSet(mode=mode, data=left_data, label=left_label)
 
 
 def get_dataloader(dataset, mode='train'):
