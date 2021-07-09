@@ -15,7 +15,7 @@ def train(model, labeled_set, unlabeled_set, valid_set):
     best_acc = 0.0
     train_set = labeled_set
     for epoch in range(n_epochs):
-        model.train() # set the model into train mode for BN
+        model.train() # set the model into train mode for BN(can be placed at the end of validate function)
         train_loss = []
         train_accs = []
         if do_semi and best_acc > 0.5 and epoch % 15 == 0:
