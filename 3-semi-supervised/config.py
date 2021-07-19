@@ -15,4 +15,6 @@ weight_decay  = 1e-5
 
 do_semi = False
 
-is_transfer = True
+model_name = 'resnet'
+
+is_transfer = False

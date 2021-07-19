@@ -100,3 +100,22 @@
 
     > The ways `torchvision` dataset is split into batches and the labels are loaded are different. Therefore,  `DataLoader` cannot handle this kind of mixed dataset.
 
+## Adopt sealed models
+
+* **REMEMBER TO CHANGE OUTPUT SIZE OF SEALED MODELS**
+
+  ```python
+  def set_parameter_requires_grad(model, feature_extract: bool):
+      for param in model.parameters():
+          param.requires_grad = feature_extract
+  
+  model = torchvision.models.resnet18(pretrained=True)
+  set_parameter_requires_grad(model, False)
+  model.fc = nn.Linear(512, num_classes)
+  ```
+
+  * When set `feature_extract` to `False`, only new output layer's parameters will be updated.
+
+* `load_state_dict` **won't** change whether the parameter requires gradient.
+
+* adjust `torchvision` modules: https://pytorch.apachecn.org/docs/1.0/finetuning_torchvision_models_tutorial.html

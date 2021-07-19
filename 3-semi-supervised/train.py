@@ -3,11 +3,12 @@ import torch.nn as nn
 from tqdm.auto import tqdm
 
 from config import (SEED, do_semi, is_transfer, labeled_path, learning_rate,
-                    model_path, momentum, n_epochs, unlabeled_path, valid_path,
-                    weight_decay)
+                    model_name, model_path, momentum, n_epochs, unlabeled_path,
+                    valid_path, weight_decay)
 from data.dataset import FOOD11DataSet, get_dataloader
 from models.cnn import Classifier
 from utils.env import get_device, same_seeds
+from utils.model import build_model
 from utils.semi import update_train_set
 
 
@@ -15,7 +16,8 @@ def train(model, labeled_set, unlabeled_set, valid_set):
     best_acc = 0.0
     train_set = labeled_set
     for epoch in range(n_epochs):
-        model.train() # set the model into train mode for BN(can be placed at the end of validate function)
+        # set the model into train mode for BN(can be placed at the end of validate function)
+        model.train()
         train_loss = []
         train_accs = []
         if do_semi and best_acc > 0.5 and epoch % 15 == 0:
@@ -76,7 +78,7 @@ if __name__ == '__main__':
     unlabeled_set = FOOD11DataSet(mode='semi', path=unlabeled_path)
     valid_set = FOOD11DataSet(mode='valid', path=valid_path)
     # Initialize a model, and put it on the device specified.
-    model = Classifier().to(device)
+    model = build_model(model_name, pre_trained=True).to(device)
     # model = torchvision.models.vgg19_bn().to(device)
     if is_transfer:
         model.load_state_dict(torch.load(model_path))

@@ -1,10 +1,11 @@
 import torch
 from tqdm.auto import tqdm
 
-from config import model_path, test_path
+from config import model_name, model_path, test_path
 from data.dataset import FOOD11DataSet, get_dataloader
 from models.cnn import Classifier
 from utils.env import get_device
+from utils.model import build_model
 
 
 def test():
@@ -29,7 +30,14 @@ if __name__ == '__main__':
     device = get_device()
     test_set = FOOD11DataSet(mode='test', path=test_path)
     test_loader = get_dataloader(test_set, mode='test')
-    model = Classifier().to(device)
+    model = build_model(model_name, pre_trained=False).to(device)
+    for name, param in model.named_parameters():
+        if param.requires_grad:
+            print(name)
+    # model = Classifier().to(device)
     # model = torchvision.models.resnet101().to(device)
     model.load_state_dict(torch.load(model_path))
+    for name, param in model.named_parameters():
+        if param.requires_grad:
+            print(name)
     test()
