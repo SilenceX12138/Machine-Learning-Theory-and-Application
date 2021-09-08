@@ -30,14 +30,16 @@
   * `torch.Tensor` will create a list or a tensor with dimension `1`(scalar).
 
     ```python
-    torch.Tensor(10) # a scalar with 10 random numbers
+    torch.Tensor(10) # a scalar with 10 random numbers as well as LongTensor()
     torch.Tensor([10]) # a scalar with 10. and dimension is torch.Size([1])
     ```
+
+    > `Tensor` will take **all** int parameters as **size** parameters
 
   * `torch.tensor` infers the `dtype` automatically, while `torch.Tensor` returns a `torch.FloatTensor`.
 
     ```python
-    >>> torch.Tensor([1,2,3]).dtype
+    >>> torch.Tensor([1, 2, 3]).dtype
     torch.float32
     >>> torch.tensor([1, 2, 3]).dtype
     Out[32]: torch.int64
