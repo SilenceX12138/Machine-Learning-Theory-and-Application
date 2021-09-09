@@ -11,10 +11,10 @@ Last but not least, there will be code update along with the lecture process.
 
 ## Content
 
-* **COVID-19 Cases Prediction:** basic application of regression
-* **Phoneme Classification:** use simple neural network to classify phoneme
-* **Image Classification**: use `CNN` to classify 11 kinds of food images
-* **Advanced Phoneme Classification:** use transformer to classify phoneme again
+* **[COVID-19 Cases Prediction](https://github.com/SilenceX12138/Cheetah/tree/master/1-regression):** basic application of regression
+* **[Phoneme Classification](https://github.com/SilenceX12138/Cheetah/tree/master/2-classification):** use simple neural network to classify phoneme
+* **[Image Classification](https://github.com/SilenceX12138/Cheetah/tree/master/3-semi-supervised)**: use `CNN` to classify 11 kinds of food images
+* **[Advanced Phoneme Classification](https://github.com/SilenceX12138/Cheetah/tree/master/4-sequence-classification):** use transformer to classify phoneme again
 * ...
 
 ## Reference
