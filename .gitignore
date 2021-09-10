@@ -3,6 +3,9 @@
 *.pth
 *.npy
 */data/*/
+logs/
+checkpoints/
+output
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
