@@ -7,7 +7,7 @@ class Classifier(nn.Module):
     def __init__(self, d_model=80, n_spks=600, dropout=0.1):
         super().__init__()
         # Project the dimension of features from that of input into d_model.
-        self.prenet = nn.Linear(40, d_model) # require last dim of data is 40
+        self.prenet = nn.Linear(40, d_model) # only require last dim of data is 40
         # TODO:
         #   Change Transformer to Conformer.
         #   https://arxiv.org/abs/2005.08100

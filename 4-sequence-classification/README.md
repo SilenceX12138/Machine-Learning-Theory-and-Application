@@ -106,3 +106,29 @@
   ```
 
   > In above case, `relu()` function will require an argument to be passed immediately.
+  
+* `BatchNorm1d` and `BatchNorm2d`
+
+  * both takes channel dimension at the second place
+  * **1d Input:** $(N, C)$​​ or $(N, C, L)$​
+  * **2d Input:** $(N,C,H,W)$​
+  
+  > Only $C$ needs to be set, which means data of different lengths can share the same BN.
+  
+* `LayerNorm`
+
+  ```python
+  input = torch.randn(20, 5, 10, 10)
+  # With Learnable Parameters
+  m = nn.LayerNorm(input.size()[1:])
+  # Without Learnable Parameters
+  m = nn.LayerNorm(input.size()[1:], elementwise_affine=False)
+  # Normalize over last two dimensions
+  m = nn.LayerNorm([10, 10])
+  # Normalize over last dimension of size 10
+  m = nn.LayerNorm(10)
+  # Activating the module
+  output = m(input)
+  ```
+
+  > Data of different lengths **can only** share the LN when settled parameters are **the same**. Usually, `embedding` is set as the last position. Then normalization is executed on every timestamp **individually**.
