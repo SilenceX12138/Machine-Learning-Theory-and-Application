@@ -1,4 +1,5 @@
-# Cheetah
+# Machine Learning Theory and Application
+
 ## Overview
 
 This repository is inspired by the [NTU Machine Learning Course](https://speech.ee.ntu.edu.tw/~hylee/ml/2021-spring.html). In that course, professor mainly focuses on the theory knowledge of machine learning and TAs will assign homework to students.

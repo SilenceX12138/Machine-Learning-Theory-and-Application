@@ -36,6 +36,11 @@
   ```python
   torchvision.utils.save_image(imgs_sample[i], f'output/{i+1}.jpg')
   ```
+  
+* `cuda()` vs `to()`
+
+  * When the computer has GPU, both work fine and have the same effect.
+  * When no GPU is found, `cuda()` will cause an error.
 
 ## WGAN Realization
 
