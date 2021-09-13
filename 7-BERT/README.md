@@ -29,15 +29,34 @@
   * valid/test set: Due to the fact that we have no idea where the answer is, the only solution is set a length of every possible part of paragraph(`doc_stride`)
   * After selecting parts, `padding` is needed to make sure all input data has the same length as `max_paragraph_len`.
 
-  > Because tokenizing a batch cannot split data set as above, so we can only implement our own data set.
+  > * Because tokenizing a batch cannot split data set as above, so we can only implement our own data set.
   >
-  > ```python
-  > pt_batch = tokenizer(
-  >     ["We are very happy to show you the 🤗 Transformers library.", "We hope you don't hate it."],
-  >     padding=True,
-  >     truncation=True,
-  >     max_length=512,
-  >     return_tensors="pt"
-  > )
-  > ```
+  >   ```python
+  >   pt_batch = tokenizer(
+  >    ["We are very happy to show you the 🤗 Transformers library.", "We hope you don't hate it."],
+  >    padding=True,
+  >    truncation=True,
+  >    max_length=512,
+  >    return_tensors="pt"
+  >   )
+  >   ```
+  >
+  >   * This **will not** combine sentences in list like question and paragraph.
+  >
+  > * Also, `tokenizer` can combine question and paragraph automatically.
+  >
+  >   ```python
+  >   question = '李宏毅幾班?'
+  >   paragraph = '李宏毅幾班大金。'
+  >   encoded = chi_tokenizer.encode(question, paragraph) # encoded is just a list instead of input data
+  >   decoded = chi_tokenizer.decode(encoded)
+  >   print(encoded)
+  >   print(decoded)
+  >   ```
+  >
+  > * Use `tokenizer` to generate input: `transformers.tokenization_utils_base.BatchEncoding`
+  >
+  >   ```python
+  >   inputs = chi_tokenizer(question, paragraph, return_tensors='pt')
+  >   ```
 
