@@ -58,11 +58,11 @@ def model_function(train_loader: DataLoader, dev_loader: DataLoader,
                 )
                 train_loss = train_acc = 0
         scheduler.step()  # update learning rate every epoch instead of batch
-    if train_config.validation:
-        temp_dev_acc = validate(model, tokenizer, epoch, dev_loader, device)
-        if temp_dev_acc > dev_acc:
-            dev_acc = temp_dev_acc
-            save_model(model)
+        if train_config.validation:
+            temp_dev_acc = validate(model, tokenizer, epoch, dev_loader, device)
+            if temp_dev_acc > dev_acc:
+                dev_acc = temp_dev_acc
+                save_model(model)
 
 
 def validate(model: nn.Module, tokenizer, epoch: int, dev_loader: DataLoader,
