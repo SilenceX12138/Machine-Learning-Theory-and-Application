@@ -12,8 +12,7 @@ class QADataset(Dataset):
         self.max_question_len = 40
         self.max_paragraph_len = 150
 
-        ##### TODO: Change value of doc_stride #####
-        self.doc_stride = 150
+        self.doc_stride = 130  # set doc_stride < max_paragraph_len so that different window will overlap
 
         # Input sequence length = [CLS] + question + [SEP] + paragraph + [SEP] = 193
         self.max_seq_len = 1 + self.max_question_len + 1 + self.max_paragraph_len + 1

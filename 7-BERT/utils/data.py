@@ -18,7 +18,9 @@ def get_dataloader(mode: str, tokenizer):
     # When constructing data sets, tokenize questions and labels separately and combine them in `__getitme()__`
     token_question_list = tokenizer(
         [question["question_text"] for question in question_list],
-        add_special_tokens=False)
+        add_special_tokens=False
+    )  # result won't contain [CLS] etc. unless manully add them
+    # Here may pop up length warning, but in QADataset it will be truncated.
     token_paragraph_list = tokenizer(paragraph_list, add_special_tokens=False)
     data_set = QADataset(mode, question_list, token_question_list,
                          token_paragraph_list)

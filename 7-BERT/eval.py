@@ -23,10 +23,12 @@ def pred(test_loader: DataLoader, model: nn.Module, tokenizer, device):
     result = []
     with torch.no_grad():
         for data in tqdm(test_loader):
-            output = model(input_ids=data[0].squeeze(dim=0).to(device),
+            # output: 4(window_count)*193
+            output = model(input_ids=data[0].squeeze(dim=0).to(device), # With squeeze, model will take 4 as batch size.
                            token_type_ids=data[1].squeeze(dim=0).to(device),
                            attention_mask=data[2].squeeze(dim=0).to(device))
             result.append(translate(data, output, tokenizer))
+    save_pred(test_loader, result)
 
 
 def save_pred(test_loader: DataLoader, result: list):
