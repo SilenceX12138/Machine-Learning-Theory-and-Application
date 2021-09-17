@@ -1,6 +1,7 @@
 .vscode
 *.ckpt
 *.pth
+*.pt
 *.npy
 */data/*/
 logs/
