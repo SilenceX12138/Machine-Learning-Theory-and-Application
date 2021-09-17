@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from config import env_config
 from torch.autograd import Variable
 from torchvision import models
 
@@ -35,14 +36,12 @@ class conv_autoencoder(nn.Module):
             nn.ReLU(),
             nn.Conv2d(24, 48, 4, stride=2, padding=1),
             nn.ReLU(),
-            nn.Conv2d(48, 96, 4, stride=2,
-                      padding=1),  # medium: remove this layer
-            nn.ReLU(),
+            # nn.Conv2d(48, 96, 4, stride=2, padding=1),  # medium: remove this layer
+            # nn.ReLU(),
         )
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(96, 48, 4, stride=2,
-                               padding=1),  # medium: remove this layer
-            nn.ReLU(),
+            # nn.ConvTranspose2d(96, 48, 4, stride=2, padding=1),  # medium: remove this layer
+            # nn.ReLU(),
             nn.ConvTranspose2d(48, 24, 4, stride=2, padding=1),
             nn.ReLU(),
             nn.ConvTranspose2d(24, 12, 4, stride=2, padding=1),
@@ -88,11 +87,10 @@ class VAE(nn.Module):
         return self.enc_out_1(h1), self.enc_out_2(h1)
 
     def reparametrize(self, mu, logvar):
+        """add Gaussian noise
+        """
         std = logvar.mul(0.5).exp_()
-        if torch.cuda.is_available():
-            eps = torch.cuda.FloatTensor(std.size()).normal_()
-        else:
-            eps = torch.FloatTensor(std.size()).normal_()
+        eps = torch.FloatTensor(std.size()).normal_().to(env_config.device)
         eps = Variable(eps)
         return eps.mul(std).add_(mu)
 
@@ -180,7 +178,7 @@ class Resnet(nn.Module):
 
         # FC layers
         if x.shape[0] > 1:
-            x = self.bn1(self.fc1(x))
+            x = self.bn1(self.fc1(x))  # batch size greater than 1
         else:
             x = self.fc1(x)
         x = self.relu(x)

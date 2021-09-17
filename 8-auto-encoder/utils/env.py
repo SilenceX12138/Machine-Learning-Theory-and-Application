@@ -7,7 +7,7 @@ from config import env_config
 
 
 def build_dir():
-    os.makedirs(env_config.cpkt_path, exist_ok=True)
+    os.makedirs(env_config.ckpt_path, exist_ok=True)
 
 
 def enable_reproduce():

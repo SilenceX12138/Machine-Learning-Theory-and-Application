@@ -6,8 +6,8 @@
 
   <img src="https://i.loli.net/2021/09/17/DZSiYAC76G5PhqM.png" alt="image-20210917140544726" style="zoom: 45%;" />
 
-  * sort all data by prediction value
-  * set threshold along with the gap of values
+  * **sort** all data by prediction value
+  * set threshold along with the **gap** of values
   * calculate `tp` and `fp` under all situations
   * plot `ROC` curve
   * calculate the area
@@ -48,4 +48,10 @@
                              num_workers=0)
     ```
 
-    
+* VAE: https://blog.csdn.net/weixin_43876801/article/details/103654186
+
+* GAN&Auto-Encoder
+
+  <img src="https://pic2.zhimg.com/80/v2-c02e17ca61a91ab7fbfa1d52be1a05f8_1440w.jpg?source=1940ef5c" alt="img" style="zoom: 33%;" />
+
+  <img src="https://pic1.zhimg.com/80/v2-6955c77ccb68b4ac464848dc9be0fd5f_1440w.jpg?source=1940ef5c" alt="img" style="zoom:33%;" />

@@ -37,6 +37,8 @@ def pred(model: nn.Module, test_loader: DataLoader):
             if test_config.model_type in ['fcn']:
                 loss = criterion(output, img).sum(-1)
             else:
+                # criterion(output, img): 256*3*64*64
+                # loss: [256]
                 loss = criterion(output, img).sum([1, 2, 3])
             abnormality_list.append(loss)
     return abnormality_list
@@ -45,10 +47,12 @@ def pred(model: nn.Module, test_loader: DataLoader):
 def save_pred(pred_list: list, test=None):
     pred_list = torch.cat(pred_list,
                           axis=0)  # 27 tensors of [128] to 1 tensor of [19999]
-    pred_list = torch.sqrt(pred_list).cpu().numpy()
+    # Due to MSE loss so we can take sqrt, but it doesn't influence AUC calculation.
+    # pred_list = torch.sqrt(pred_list).cpu().numpy()
+    pred_list = pred_list.cpu().numpy()
     df = pd.DataFrame(pred_list, columns=['Predicted'])
     df.to_csv(test_config.pred_path, index_label='Id')
 
 
 if __name__ == '__main__':
-    eval('0.0235.pth')
+    eval('0.0074.pth')

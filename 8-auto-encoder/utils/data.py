@@ -9,7 +9,8 @@ from data.FaceDataset import FaceDataset
 
 
 def get_loader(mode: str):
-    data_file = os.path.join(env_config.data_path, '{}ingset.npy'.format(mode))
+    data_file = os.path.join(env_config.workspace, env_config.data_path,
+                             '{}ingset.npy'.format(mode))
     # set allow_pickle False for security purpose and data_file in .npy cannot be loaded
     data = np.load(data_file, allow_pickle=True)
     data = torch.tensor(data, dtype=torch.float32)
@@ -28,8 +29,7 @@ def IO_format(data: torch.Tensor, model_type: str):
         img = data.float()
     elif model_type in ['fcn']:
         img = data.float()
-        img = img.view(img.shape[0], -1)
+        img = img.view(img.shape[0], -1)  # flatten image
     else:
         img = data[0]
-
     return img

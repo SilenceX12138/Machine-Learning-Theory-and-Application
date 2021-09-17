@@ -7,7 +7,19 @@ from config import env_config, train_config
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
+from model.AutoEncoder import VAE, Resnet, conv_autoencoder, fcn_autoencoder
 from utils.data import IO_format
+
+
+def build_model(model_type: str):
+    model_classes = {
+        'resnet': Resnet(),
+        'fcn': fcn_autoencoder(),
+        'cnn': conv_autoencoder(),
+        'vae': VAE(),
+    }
+    model = model_classes[model_type]
+    return model
 
 
 def model_function(model: nn.Module, train_loader: DataLoader):
@@ -21,10 +33,11 @@ def model_function(model: nn.Module, train_loader: DataLoader):
 
     best_loss = np.inf
     for epoch in range(train_config.num_epochs):
-        tot_loss = list()
+        tot_loss = []
         for data in tqdm(train_loader):
             img = IO_format(data, train_config.model_type)
             img = img.to(env_config.device)
+            # 3*64*64 to 3*64*64
             output = model(img)
             if train_config.model_type in ['vae']:
                 loss = loss_vae(output[0], img, output[1], output[2],
