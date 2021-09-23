@@ -3,11 +3,14 @@
 *.pth
 *.pt
 *.npy
+*.tgz
 */data/*/
 logs/
 checkpoints/
 output
 fairseq
+fgsm/
+ifgsm/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
