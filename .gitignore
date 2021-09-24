@@ -1,4 +1,5 @@
 .vscode
+.idea
 *.ckpt
 *.pth
 *.pt
@@ -11,6 +12,9 @@ output
 fairseq
 fgsm/
 ifgsm/
+food/
+hw9_bert/
+*.ttf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
