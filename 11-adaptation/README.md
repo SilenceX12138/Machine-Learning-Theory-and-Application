@@ -121,7 +121,7 @@
     loss.backward()
     ```
   
-  * `GRL` training process is **slower** than `GAN` method
+  * `GRL` training process is **slower** than `GAN` method, and the performance is not as good as `GAN`.
 
 * Domain Knowledge: Pre-process source data can help extractor perform better. For instance, change RGB source into gray and extract edges can help when target is gray-scale edge photos.
 * `BCE` is used when calculating binary classification loss.
