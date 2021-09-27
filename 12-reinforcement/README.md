@@ -13,6 +13,6 @@
 | :------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :---------: |
 |                  Version 0                   |   ![1](https://i.loli.net/2021/09/27/Xpr5nTLty7R6Vlf.png)    |   ![2](https://i.loli.net/2021/09/27/pbIgBkO6EFGyReL.png)    |  $-12.23$   |
 |                  Version 2                   | ![download](https://i.loli.net/2021/09/27/qM4NEbA3GUwSs9I.png) | ![download (1)](https://i.loli.net/2021/09/27/F5O9EtLZuIP8oVf.png) |   $10.88$   |
-| Version 4 (Advantage Actor-Critic,800 epoch) | ![download](https://i.loli.net/2021/09/27/uik8NaoUxzspTwG.png) | ![download (2)](https://i.loli.net/2021/09/27/NmL2XDKQizuodC3.png) |  $-22.57$   |
+| Version 4 (Advantage Actor-Critic, 1000 epoch) | ![download](https://i.loli.net/2021/09/27/uik8NaoUxzspTwG.png) | ![download (2)](https://i.loli.net/2021/09/27/NmL2XDKQizuodC3.png) |  $-22.57$   |
 
 * Actor Critic converge much **slower** than other two methods.
