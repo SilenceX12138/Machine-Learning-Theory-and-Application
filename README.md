@@ -16,13 +16,13 @@ Last but not least, there will be code update along with the lecture process.
 * **[Phoneme Classification](https://github.com/SilenceX12138/Cheetah/tree/master/2-classification):** use simple neural network to classify phoneme
 * **[Image Classification](https://github.com/SilenceX12138/Cheetah/tree/master/3-semi-supervised)**: use `CNN` to classify 11 kinds of food images
 * **[Advanced Phoneme Classification](https://github.com/SilenceX12138/Cheetah/tree/master/4-sequence-classification):** use transformer to classify phoneme again
-* [Machine Translation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/5-seq2seq): use transformer to complete `seq2seq` task
-* [Anime Face Generation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/6-GAN): use `GAN` to generate images
-* [Question Answering](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/7-BERT): fine-tune `BERT` for its adaptation to QA task
-* [Anomaly Detection](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/8-auto-encoder): use Auto-encoder to detect fake human faces
-* [Explainable AI](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/9-explain): explain AI modules to convince people
-* [Adversarial Attack](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/10-attack): generate images to disable well-trained models
-* [Domain Adaptation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/11-adaptation): classify images in two different plotting styles
+* **[Machine Translation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/5-seq2seq)**: use transformer to complete `seq2seq` task
+* **[Anime Face Generation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/6-GAN)**: use `GAN` to generate images
+* **[Question Answering](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/7-BERT)**: fine-tune `BERT` for its adaptation to QA task
+* **[Anomaly Detection](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/8-auto-encoder)**: use Auto-encoder to detect fake human faces
+* **[Explainable AI](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/9-explain)**: explain AI modules to convince people
+* **[Adversarial Attack](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/10-attack)**: generate images to disable well-trained models
+* **[Domain Adaptation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/11-adaptation)**: classify images in two different plotting styles
 * ...
 
 ## Reference
