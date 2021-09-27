@@ -23,6 +23,7 @@ Last but not least, there will be code update along with the lecture process.
 * **[Explainable AI](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/9-explain)**: explain AI modules to convince people
 * **[Adversarial Attack](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/10-attack)**: generate images to disable well-trained models
 * **[Domain Adaptation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/11-adaptation)**: classify images in two different plotting styles
+* **[Reinforcement Learning](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/12-reinforcement)**: implement RL game models of OpenAI with `Policy Gradient` and `Actor Critic`
 * ...
 
 ## Reference
