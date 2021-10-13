@@ -15,6 +15,7 @@ ifgsm/
 food/
 hw9_bert/
 *.ttf
+*/food-11/*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
