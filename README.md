@@ -24,7 +24,9 @@ Last but not least, there will be code update along with the lecture process.
 * **[Adversarial Attack](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/10-attack)**: generate images to disable well-trained models
 * **[Domain Adaptation](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/11-adaptation)**: classify images in two different plotting styles
 * **[Reinforcement Learning](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/12-reinforcement)**: implement RL game models of OpenAI with `Policy Gradient` and `Actor Critic`
-* ...
+* **[Network Compression](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/13-compression)**: use knowledge distillation and design architecture to help small model perform as well as big ones
+* **[Life-long Learning](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/14-continuous)**: compare regularization-based methods including `EWC`, `MAS` etc., to help model go against catastrophic forgetting
+* **[Meta Learning](https://github.com/SilenceX12138/Machine-Learning-Theory-and-Application/tree/master/15-meta)**: use `MAML` as meta algorithm to find a good initialization for CNN-based classifier
 
 ## Reference
 
