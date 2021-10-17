@@ -8,6 +8,8 @@ However, the explanations on homework is not quite enough for real-world applica
 
 This repository is not only about homework itself, but also contains many useful technical tutorials to show how these machine learning methods can be applied in daily situations.
 
+If you are also looking for theory notes, please refer to **[this page](https://silencejiang.xyz/2021/06/23/Machine-Learning-Course-Note/)**.
+
 Last but not least, there will be code update along with the lecture process.
 
 ## Content
